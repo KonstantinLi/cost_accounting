@@ -54,14 +54,14 @@ def user_page():
         return render_template("userpage.html", categories=categories, name=name, records=records)
 
     else:
-        user_name = request.args.get("user")
+        user_name = request.form.get("user")
         if user_name not in [user.get_name() for user in data["users"]]:
             return f'''<h3>No such user {user_name}</h3><a href="/users">
             <input type="button" value="go to users"></a>'''
 
         user = [user for user in data["users"] if user.get_name() == user_name][0]
 
-        category_type = request.args.get("category")
+        category_type = request.form.get("category")
         if category_type not in [category.get_type() for category in data["categories"]]:
             return f'''<h3>No such category {category_type}</h3><a href="/users">
             <input type="button" value="go to users"></a> '''
@@ -70,12 +70,12 @@ def user_page():
 
         try:
             date_format = "%Y-%m-%d %H:%M:%S"
-            date_time = datetime.strptime(request.args.get("date_time"), date_format)
+            date_time = datetime.strptime(request.form.get("date_time"), date_format)
         except ValueError:
             return '''<h3>Неправильний формат дати/часу</h3>
                       <h4>Приклад форматування: 2020-01-01 22:00:00</h4>'''
 
-        pay = int(request.args.get("pay"))
+        pay = int(request.form.get("pay"))
 
         record = model.Record(user, category, date_time, pay)
         data["records"].append(record)
@@ -87,9 +87,9 @@ def user_page():
 @app.route("/users", methods=("GET", "POST"))
 def users():
     if request.method == "POST":
-        submit = request.args.get("submit")
+        submit = request.form.get("submit")
         if submit == "Створити":
-            username = request.args.get("username")
+            username = request.form.get("username")
             data["users"].append(model.User(username))
 
             f = open("app/resources/users.txt", "a")
@@ -100,7 +100,7 @@ def users():
             <a href="/users/user?name={username}">Особистий кабінет</a>'''
 
         elif submit == "Додати":
-            category_type = request.args.get("category_name")
+            category_type = request.form.get("category_name")
             data["categories"].append(model.Category(category_type))
 
             return f'''<h3>Category {category_type} is successfully added</h3>
