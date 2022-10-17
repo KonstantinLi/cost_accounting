@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block body %}
+    <div id="header" style="height: 50px">
+        <a class="logout" href="/registration">New user</a>
+    </div>
+    <div class="profile">
+        <h3>Список користувачів</h3>
+        <table>
+            <tr style="font-style: italic">
+                <td></td>
+                <td>id</td>
+                <td>Ім'я</td>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>
+                    <a href="/users/user?name={{ user.get_name() }}">
+                        <img src="../static/image/arrow.png">
+                    </a>
+                </td>
+                <td>{{ user.get_id() }}</td>
+                <td>{{ user.get_name() }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="profile">
+        <h3>Список категорій</h3>
+        <table>
+            <tr style="font-style: italic">
+                <td>id</td>
+                <td>Назва</td>
+            </tr>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.get_id() }}</td>
+                <td>{{ category.get_type() }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/category"><input class="add-btn" type="button" value="Додати категорію"></a>
+    </div>
+{% endblock %}

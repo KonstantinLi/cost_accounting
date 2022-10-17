@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+      <div class="main-div">
+            <h1>Реєстраційна форма</h1>
+            <form method="POST" action="/users">
+                <div class="form">
+                    <div class="form-group">
+                        <label>{{ form.username.label }}</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        <input class="btn-filter" type="submit" name="submit" value="Створити">
+                        <a href="/users"><input type="button" name="goto" value="Всі користувачі"></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

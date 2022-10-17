@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Add record
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+      <div class="main-div">
+            <h1>Новий запис {% if user_name %}для {{ user_name }}{% endif %}</h1>
+            <form method="POST" action="/users/user">
+                <div class="form">
+                    <div class="form-group">
+                        {% if not user_name %}
+                            <label>Користувач</label><br>
+                            <select name="user">
+                            {% for user in users %}
+                                <option style="font-size: 14px" value="{{ user }}">{{ user }}</option>
+                            {% endfor %}
+                            </select><br>
+                        {% else %}
+                            <input type="hidden" name="user" value="{{ user_name }}">
+                        {% endif %}
+                        <label>Категорія</label><br>
+                        <select name="category">
+                        {% for category in categories %}
+                            <option style="font-size: 14px" value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                        </select><br>
+                        <label>{{ form.date_time.label }}</label><br>
+                        {{ form.date_time }}<br>
+                        <label>{{ form.pay.label }}</label><br>
+                        {{ form.pay }}
+                    </div>
+                    <div class="form-group">
+                        <input class="btn-filter" type="submit" name="submit" value="Додати запис">
+                        <a href="/users"><input type="button" name="goto" value="Всі користувачі"></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

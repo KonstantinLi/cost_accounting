@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ name + " page" }}
+{% endblock %}
+
+{% block body %}
+    <div id="header" style="height: 70px">
+        <a href="/registration">New user</a><br>
+        <a href="/users">All users</a>
+    </div>
+    <div class="profile">
+        <h3>Записи користувача {{ name }}</h3>
+        <div class="filter">
+            <form method="GET" name="filter" action="/users/user">
+                <label class="item">Фільтрувати за категорією</label><br>
+                <input type="hidden" name="name" value="{{ name }}">
+                <select class="item" name="category">
+                    {% for choice in categories %}
+                    <option style="font-size: 14px" value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                </select>
+                <div class="btn-filter">
+                    <input type="submit" name="submit" value="Використати фільтр">
+                    <a href="/users/user?name={{ name }}">
+                        <img src="../static/image/red-cross.png" alt="Очистити" height="25" width="25">
+                    </a>
+                </div>
+            </form>
+        </div>
+        <table style="width:40%">
+            <tr style="font-style: italic">
+                <th>id</th>
+                <th>Категорія</th>
+                <th>Дата/час</th>
+                <th>Витрати (грн.)</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <th>{{ record.get_id() }}</th>
+                <th>{{ record.get_category().get_type() }}</th>
+                <th>{{ record.get_date() }}</th>
+                <th>{{ record.get_pay() }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/record?name={{ name }}"><input class="add-btn" type="button" value="Додати запис"></a>
+    </div>
+{% endblock %}
