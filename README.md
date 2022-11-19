@@ -1,4 +1,4 @@
-# Backend REST API (education)
+# Cost accounting with graphic interface (education)
 > Власність студента **Ліненка Костянтина** групи *ІО-01 ФІОТ*
 
 ## Котроткий опис
