@@ -24,7 +24,7 @@
 Для початку необхідно клонувати проект у свою робочу директорію:
 
 ```
-git clone https://github.com/KonstantinLi/backend-rest_edu.git
+git clone https://github.com/KonstantinLi/cost_accounting.git
 ```
 
 Далі запустити проект можна декількома способами.
